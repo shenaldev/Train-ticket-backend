@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reservation_seats', function (Blueprint $table) {
             $table->id();
             $table->bigInteger("reservation_id", false, true);
-            $table->int("seat_no", false, true);
+            $table->integer("seat_no", false, true);
             $table->timestamps();
             //FORIGN KEY CHECKS
             $table->foreign("reservation_id")->on("reservations")->references("id")->cascadeOnDelete()->cascadeOnUpdate();

@@ -20,7 +20,7 @@ return new class extends Migration
             //FORIGN KEY CHEKS
             $table->foreign("user_id")->on("users")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign("schedule_id")->on("train_schedules")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign("class_id")->on("class")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign("class_id")->on("classes")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
