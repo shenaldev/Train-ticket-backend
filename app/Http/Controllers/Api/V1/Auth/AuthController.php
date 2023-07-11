@@ -45,7 +45,7 @@ class AuthController extends Controller
         $encToken = Crypt::encryptString($token);
         $response = [
             'user' => new UserResource($user),
-            'token' => $encToken,
+            'token' => $token,
         ];
 
         $cookie = Cookie::make($this->AUTH_COOKIE_NAME, $encToken, $this->COOKIE_EXPIRE_TIME);
