@@ -18,15 +18,17 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
 ## How To Install Project
-Clone the git repository into your pc. then navigate to the folder. next run this command. (need to install composer first)
+1. Clone the git repository into your pc.
+2. then navigate to the folder.
+3. next run this command. (need to install composer first)
 [Composer Download Link](https://getcomposer.org/download/)
 
 Run this command in the terminal
 
     composer install
 
- 1. Clone the file .env.example and rename it to .env 
- 2. Next create a database and set up a .env file. change the values of your env
+ 4. Clone the file .env.example and rename it to .env 
+ 5. Next create a database and set up a .env file. change the values of your env
 
     <pre>DB_HOST=localhost
     DB_PORT=3306
@@ -34,7 +36,7 @@ Run this command in the terminal
     DB_USERNAME=root
     DB_PASSWORD=</pre>
 
-3. Next run the command to start the server
+6. Next run the command to start the server
 
     `php artisan serve`
 
