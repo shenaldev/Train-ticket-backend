@@ -20,7 +20,7 @@ Laravel has the most extensive and thorough [documentation](https://laravel.com/
 ## How To Install Project
 1. Clone the git repository into your pc.
 2. then navigate to the folder.
-3. next run this command. (need to install composer first)
+3. Install all the dependencies. (need to install composer first)
 [Composer Download Link](https://getcomposer.org/download/)
 
 Run this command in the terminal
@@ -28,7 +28,7 @@ Run this command in the terminal
     composer install
 
  4. Clone the file .env.example and rename it to .env 
- 5. Next create a database and set up a .env file. change the values of your env
+ 5. Create a database and set up a .env file. change the values of your env
 
     <pre>DB_HOST=localhost
     DB_PORT=3306
@@ -36,7 +36,7 @@ Run this command in the terminal
     DB_USERNAME=root
     DB_PASSWORD=</pre>
 
-6. Next run the command to start the server
+6. Start the server
 
     `php artisan serve`
 
