@@ -12,4 +12,9 @@ class Train extends Model
     protected $fillable = [
         "name", "slug",
     ];
+
+    public function train_schedules()
+    {
+        return $this->belongsToMany(TrainSchedule::class, "train_id");
+    }
 }

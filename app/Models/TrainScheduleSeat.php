@@ -12,4 +12,14 @@ class TrainScheduleSeat extends Model
     protected $fillable = [
         "schedule_id", "class_id", "available_count",
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    public function train_schedule()
+    {
+        return $this->belongsTo(TrainSchedule::class);
+    }
 }
