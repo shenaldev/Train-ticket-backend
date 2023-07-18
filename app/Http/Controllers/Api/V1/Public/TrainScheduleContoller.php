@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reservation;
 use App\Models\TrainSchedule;
 use DateTime;
 use Illuminate\Http\Request;
@@ -38,5 +39,24 @@ class TrainScheduleContoller extends Controller
             ->get();
 
         return response()->json($trains);
+    }
+
+    public function scheduleSeats(Request $request)
+    {
+        $scheduleId = $request->schedule_id;
+        $reservations = Reservation::select([
+            "reservations.id", "reservations.schedule_id", "reservations.class_id",
+            "reservation_seats.id", "reservation_seats.seat_no",
+        ])
+            ->where("schedule_id", "=", $scheduleId)
+            ->join("reservation_seats", "reservations.id", "=", "reservation_seats.reservation_id")
+            ->get();
+
+        //GROUP BY CLASS ID
+        $reservedSeats = $reservations->mapToGroups(function ($item, int $key) {
+            return [$item['class_id'] => $item["seat_no"]];
+        });
+
+        return response()->json([$reservedSeats]);
     }
 }

@@ -22,6 +22,7 @@ Route::prefix("v1")->group(function () {
     //TRAIN SCHEDULE ROUTES
     Route::prefix('train-schedule')->group(function () {
         Route::post("/search", [TrainScheduleContoller::class, "search"]);
+        Route::post("/seats", [TrainScheduleContoller::class, "scheduleSeats"]);
     });
 
 });
