@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Admin\ReservationController;
+use App\Http\Controllers\Api\V1\Admin\UserController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Auth\PasswordController;
 use App\Http\Controllers\Api\V1\Email\EmailVerificationController;
 use App\Http\Controllers\Api\V1\Public\LocationContoller;
 use App\Http\Controllers\Api\V1\Public\TrainScheduleContoller;
 use App\Http\Controllers\Api\V1\Roles\UserRolesController;
-use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\User\ReservationController as UserReservationController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -46,7 +48,17 @@ Route::middleware('guest')->group(function () {
  * PROTECTED ROUTES
  */
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
-    Route::get('/user', [UserController::class, 'index']);
-    //USER ROLES FOR ADMIN
-    Route::post('/user/roles/{user_id}/{role_id}', [UserRolesController::class, 'store']);
+    //USER ROUTES
+    Route::prefix('user')->group(function () {
+        Route::get('/reservations', [UserReservationController::class, 'index']);
+    });
+
+    //ADMIN ROUTES
+    Route::prefix('dashboard')->middleware(['auth:sanctum', "ability:admin"])->group(function () {
+        Route::prefix('user')->group(function () {
+            Route::get('/all', [UserController::class, 'index']);
+            Route::post('/roles/{user_id}/{role_id}', [UserRolesController::class, 'store']);
+        });
+        Route::post('/reservations/all', [ReservationController::class, 'index']);
+    });
 });

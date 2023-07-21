@@ -17,4 +17,9 @@ class Train extends Model
     {
         return $this->belongsToMany(TrainSchedule::class, "train_id");
     }
+
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

@@ -30,7 +30,7 @@
 							"formdata": [
 								{
 									"key": "email",
-									"value": "admin@auth.com",
+									"value": "admin@trains.com",
 									"type": "text"
 								},
 								{
@@ -76,12 +76,22 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "admin",
+									"value": "user one",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "use1@auth.com",
+									"value": "use1@user.com",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "940714562365",
+									"type": "text"
+								},
+								{
+									"key": "nic",
+									"value": "236546987456",
 									"type": "text"
 								},
 								{
@@ -540,46 +550,130 @@
 			]
 		},
 		{
-			"name": "User Details",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
-				}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
+			"name": "Admin Routes",
+			"item": [
+				{
+					"name": "Get All Users",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
 						}
-					]
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/dashboard/user/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"dashboard",
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
 				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8000/api/v1/user",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"v1",
-						"user"
-					]
+				{
+					"name": "Get All Reservations",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "from",
+									"value": "2023-07-21",
+									"type": "text"
+								},
+								{
+									"key": "to",
+									"value": "2023-07-31",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/dashboard/reservations/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"dashboard",
+								"reservations",
+								"all"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "User Routes",
+			"item": [
+				{
+					"name": "Get Reservations",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/user/reservations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"reservations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
