@@ -16,8 +16,9 @@ class UsersTableSeeder extends Seeder
     {
         $admin = User::create([
             'name' => 'admin',
-            'email' => 'admin@auth.com',
+            'email' => 'admin@trains.com',
             "phone_no" => "075-456-6651",
+            'nic' => '123456789',
             'password' => Hash::make('pass'),
         ]);
 
@@ -28,8 +29,9 @@ class UsersTableSeeder extends Seeder
 
         $user = User::create([
             'name' => 'user',
-            'email' => 'user@auth.com',
+            'email' => 'user@trains.com',
             "phone_no" => "075-456-6653",
+            'nic' => '123456789',
             'password' => Hash::make('pass'),
         ]);
 

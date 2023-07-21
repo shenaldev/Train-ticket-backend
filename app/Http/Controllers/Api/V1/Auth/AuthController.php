@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\UserRole;
 use App\Traits\UserRolesTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
@@ -33,11 +32,11 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (!Auth::attempt($request->only(['email', 'password']))) {
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(["message" => "The provided credentials do not match our records"], 401);
         }
-
-        $user = User::where('email', $request->email)->first();
 
         //CREATE USER TOKEN WITH ROLES THEN RETURN TOKEN WITH COOKIE
         $roles = $this->getUserRoles($user); //GET USER ROLES
@@ -63,12 +62,16 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|min:1|max:200|string',
             'email' => 'required|email|min:3|max:200|unique:users,email',
+            'phone_number' => 'required',
+            'nic' => 'required',
             'password' => 'required|min:8|max:20|confirmed',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone_no' => $request->phone_number,
+            'nic' => $request->nic,
             'password' => Hash::make($request->password),
         ]);
 
@@ -86,7 +89,7 @@ class AuthController extends Controller
 
         $response = [
             'user' => new UserResource($user),
-            'token' => $encToken,
+            'token' => $token,
         ];
 
         $cookie = Cookie::make($this->AUTH_COOKIE_NAME, $encToken, $this->COOKIE_EXPIRE_TIME);
