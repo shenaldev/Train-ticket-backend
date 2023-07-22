@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
             LocationsTableSeeder::class,
             TrainsTableSeeder::class,
             ClassesTableSeeder::class,
+            TrainRouteSeeder::class,
             TrainSchedulesTableSeeder::class,
-            TrainSchedulePricesTableSeeder::class,
         ]);
     }
 }

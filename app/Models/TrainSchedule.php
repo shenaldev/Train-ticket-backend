@@ -12,7 +12,7 @@ class TrainSchedule extends Model
     use PowerJoins;
 
     protected $fillable = [
-        "train_id", "from", "to", "departure_time", "arrival_time",
+        "train_id", "from", "to", "departure_time", "arrival_time", 'routes_id',
     ];
 
     protected $hidden = [

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('train_id', false, true);
             $table->bigInteger("from", false, true);
             $table->bigInteger("to", false, true);
+            $table->bigInteger("routes_id", false, true);
             $table->dateTime("departure_time");
             $table->dateTime("arrival_time");
             $table->timestamps();
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->foreign("train_id")->on("trains")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign("from")->on("locations")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign("to")->on("locations")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign("routes_id")->on("train_routes")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
