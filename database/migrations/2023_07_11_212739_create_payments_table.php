@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id', false, true);
             $table->bigInteger("reservation_id", false, true);
+            $table->integer('discount', false, true)->nullable();
             $table->double("amount", 8, 2);
             $table->timestamps();
             //FORIGN KEY CHECKS
             $table->foreign("reservation_id")->on("reservations")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign("user_id")->on("users")->references("id")->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
