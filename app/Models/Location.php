@@ -17,6 +17,6 @@ class Location extends Model
 
     public function train_schedule()
     {
-        return $this->hasMany(TrainSchedule::class, "from");
+        return $this->hasMany(TrainSchedule::class);
     }
 }

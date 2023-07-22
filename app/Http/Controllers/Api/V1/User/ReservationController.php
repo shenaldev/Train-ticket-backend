@@ -28,17 +28,19 @@ class ReservationController extends Controller
             ->whereDate("train_schedules.departure_time", "<=", date($request->to))
             ->select([
                 "reservations.*",
-                'train_schedules.id as schedule',
+                'train_schedules.id as schedule', "train_schedules.departure_time", "train_schedules.train_id",
                 "trains.name as train",
             ])
             ->join("train_schedules", "train_schedules.id", "=", "reservations.schedule_id")
             ->join("trains", "train_schedules.train_id", "=", "trains.id")
-            ->with("train_schedule.location:id,name",
+            ->with(
+                "reservation_seats:id,reservation_id,seat_no",
+                "train_schedule.location:id,name",
                 "train_schedule.locationTo:id,name",
-                "reservation_seats:id,reservation_id,seat_no")
+            )
             ->orderBy("train_schedules.departure_time")
             ->get()
-            ->groupBy("train_schedule.departure_time");
+            ->groupBy("departure_time");
 
         return response()->json($reservations);
 

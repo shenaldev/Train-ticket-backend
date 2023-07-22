@@ -20,6 +20,6 @@ class TrainScheduleSeat extends Model
 
     public function train_schedule()
     {
-        return $this->belongsTo(TrainSchedule::class, "schedule_id");
+        return $this->belongsTo(TrainSchedule::class);
     }
 }

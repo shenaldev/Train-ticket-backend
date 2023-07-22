@@ -37,16 +37,16 @@ class TrainSchedule extends Model
 
     public function schedule_price()
     {
-        return $this->hasMany(TrainSchedulePrice::class, 'id');
+        return $this->hasMany(TrainSchedulePrice::class, "schedule_id");
     }
 
     public function schedule_seats()
     {
-        return $this->hasMany(TrainScheduleSeat::class, "id");
+        return $this->hasMany(TrainScheduleSeat::class, "schedule_id");
     }
 
     public function reservations()
     {
-        return $this->hasMany(Reservation::class, 'id');
+        return $this->hasMany(Reservation::class);
     }
 }
