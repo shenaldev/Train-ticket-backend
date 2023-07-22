@@ -12,7 +12,7 @@ class LocationContoller extends Controller
      */
     public function locations()
     {
-        $locations = Location::all(["name", "slug"]);
+        $locations = Location::all(["id", "name", "slug"]);
 
         return response()->json($locations, 200);
     }

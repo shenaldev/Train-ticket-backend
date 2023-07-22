@@ -15,6 +15,11 @@ class Reservation extends Model
         "user_id", "schedule_id", "class_id",
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -25,13 +30,8 @@ class Reservation extends Model
         return $this->hasMany(ReservationSeat::class);
     }
 
-    public function train()
-    {
-        return $this->belongsTo(Train::class);
-    }
-
     public function train_schedule()
     {
-        return $this->belongsTo(TrainSchedule::class);
+        return $this->belongsTo(TrainSchedule::class, "schedule_id");
     }
 }

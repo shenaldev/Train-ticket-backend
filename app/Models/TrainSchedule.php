@@ -22,7 +22,7 @@ class TrainSchedule extends Model
 
     public function train()
     {
-        return $this->belongsTo(Train::class);
+        return $this->belongsTo(Train::class, "train_id");
     }
 
     public function location()
@@ -30,18 +30,23 @@ class TrainSchedule extends Model
         return $this->belongsTo(Location::class, "from");
     }
 
+    public function locationTo()
+    {
+        return $this->belongsTo(Location::class, 'to');
+    }
+
     public function schedule_price()
     {
-        return $this->hasMany(TrainSchedulePrice::class, 'schedule_id');
+        return $this->hasMany(TrainSchedulePrice::class, 'id');
     }
 
     public function schedule_seats()
     {
-        return $this->hasMany(TrainScheduleSeat::class, "schedule_id");
+        return $this->hasMany(TrainScheduleSeat::class, "id");
     }
 
     public function reservations()
     {
-        return $this->hasMany(Reservation::class, 'schedule_id');
+        return $this->hasMany(Reservation::class, 'id');
     }
 }

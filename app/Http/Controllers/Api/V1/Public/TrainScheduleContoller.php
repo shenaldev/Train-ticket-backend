@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use App\Models\TrainSchedule;
-use DateTime;
 use Illuminate\Http\Request;
 
 class TrainScheduleContoller extends Controller
@@ -31,7 +30,7 @@ class TrainScheduleContoller extends Controller
         ])
             ->where("from", "=", $from)
             ->where("to", "=", $to)
-            ->where("departure_time", ">=", new DateTime($date))
+            ->whereDate("departure_time", "like", date($date))
             ->join("trains", "train_schedules.train_id", "=", "trains.id")
             ->join("locations as from", "train_schedules.from", "=", "from.id")
             ->join("locations as to", "train_schedules.to", "=", "to.id")
@@ -41,6 +40,9 @@ class TrainScheduleContoller extends Controller
         return response()->json($trains);
     }
 
+    /**
+     * RETURN RESERVED SEAT IDS GROUP BY CLASS
+     */
     public function scheduleSeats(Request $request)
     {
         $scheduleId = $request->schedule_id;

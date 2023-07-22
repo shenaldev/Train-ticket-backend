@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kirschbaum\PowerJoins\PowerJoins;
 
 class Train extends Model
 {
     use HasFactory;
+    use PowerJoins;
 
     protected $fillable = [
         "name", "slug",
@@ -15,11 +17,7 @@ class Train extends Model
 
     public function train_schedules()
     {
-        return $this->belongsToMany(TrainSchedule::class, "train_id");
+        return $this->belongsToMany(TrainSchedule::class, "id");
     }
 
-    public function reservation()
-    {
-        return $this->hasMany(Reservation::class);
-    }
 }

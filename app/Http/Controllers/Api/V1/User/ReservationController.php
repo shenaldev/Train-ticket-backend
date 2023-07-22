@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\TrainSchedule;
-use App\Models\User;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -13,18 +12,17 @@ class ReservationController extends Controller
     {
         $userID = $request->user()->id;
 
-        $reservations = TrainSchedule::select([
-            'train_schedules.id',
-            'reservations.id as reservation_id',
-            'trains.name as train_name',
-            'classes.name as class',
-            'train_schedules.departure_time',
-            'train_schedules.arrival_time',
-        ])->
-            where('reservations.user_id', "=", $userID)
-            ->join("reservations", "train_schedules.id", "=", "reservations.schedule_id")
-            ->join("trains", "trains.id", "=", "train_schedules.train_id")
-            ->join("classes", 'classes.id', "=", 'reservations.class_id')
+        $reservations = Reservation::where("user_id", "=", $userID)
+            ->select([
+                "reservations.*",
+                'train_schedules.id as schedule',
+                "trains.name as train",
+            ])
+            ->join("train_schedules", "train_schedules.id", "=", "reservations.schedule_id")
+            ->join("trains", "train_schedules.train_id", "=", "trains.id")
+            ->with("train_schedule.location:id,name",
+                "train_schedule.locationTo:id,name",
+                "reservation_seats:id,reservation_id,seat_no")
             ->get();
 
         return response()->json($reservations);
