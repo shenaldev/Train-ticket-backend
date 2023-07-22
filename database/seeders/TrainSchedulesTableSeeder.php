@@ -17,8 +17,7 @@ class TrainSchedulesTableSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        $fakeDate = $faker->dateTimeBetween("now", "+1 months");
-
+        $fakeDate = $this->createFakeDate($faker);
         //KANDY TO BADULLA
         $schedule1 = TrainSchedule::create([
             'train_id' => 2,
@@ -32,6 +31,7 @@ class TrainSchedulesTableSeeder extends Seeder
         $this->seedRelations($schedule1->id, $faker);
 
         //BADULLA TO KANDY
+        $fakeDate = $this->createFakeDate($faker);
         $schedule1 = TrainSchedule::create([
             'train_id' => 11,
             'from' => 8,
@@ -44,6 +44,7 @@ class TrainSchedulesTableSeeder extends Seeder
         $this->seedRelations($schedule1->id, $faker);
 
         //KANDY TO COLOMBO
+        $fakeDate = $this->createFakeDate($faker);
         $schedule2 = TrainSchedule::create([
             'train_id' => 3,
             'from' => 37,
@@ -56,6 +57,7 @@ class TrainSchedulesTableSeeder extends Seeder
         $this->seedRelations($schedule2->id, $faker);
 
         //COLOMBO TO KANDY
+        $fakeDate = $this->createFakeDate($faker);
         $schedule3 = TrainSchedule::create([
             'train_id' => 17,
             'from' => 37,
@@ -68,6 +70,7 @@ class TrainSchedulesTableSeeder extends Seeder
         $this->seedRelations($schedule3->id, $faker);
 
         //COLOMBO TO GALLA
+        $fakeDate = $this->createFakeDate($faker);
         $schedule1 = TrainSchedule::create([
             'train_id' => 8,
             'from' => 16,
@@ -103,5 +106,11 @@ class TrainSchedulesTableSeeder extends Seeder
             ]);
         }
 
+    }
+
+    protected function createFakeDate($faker)
+    {
+        $fakeDate = $faker->dateTimeBetween("now", "+1 months");
+        return $fakeDate;
     }
 }

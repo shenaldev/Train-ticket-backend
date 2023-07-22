@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             ClassesTableSeeder::class,
             TrainRouteSeeder::class,
             TrainSchedulesTableSeeder::class,
+            ReservationTableSeeder::class,
+            ReservationSeatSeeder::class,
         ]);
     }
 }
