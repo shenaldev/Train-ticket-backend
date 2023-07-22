@@ -18,7 +18,7 @@ class ReservationSeatSeeder extends Seeder
         $faker = Faker::create();
 
         foreach ($this->classesID as $class) {
-            for ($i = 1; $i <= 5; $i++) {
+            for ($i = 1; $i <= 2; $i++) {
                 ReservationSeat::create([
                     'reservation_id' => $class,
                     'seat_no' => $faker->numberBetween(1, 20),
