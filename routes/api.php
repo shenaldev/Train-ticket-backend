@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Admin\ReservationController;
+use App\Http\Controllers\Api\V1\Admin\StatisticsController;
 use App\Http\Controllers\Api\V1\Admin\TrainRouteContoller;
 use App\Http\Controllers\Api\V1\Admin\TrainScheduleContoller as AdminTrainScheduleContoller;
 use App\Http\Controllers\Api\V1\Admin\UserController;
@@ -54,14 +55,16 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/reservations', [UserReservationController::class, 'index']);
         Route::post('/reservation', [UserReservationController::class, 'store']);
+        Route::get('/reservations/count', [UserReservationController::class, 'count']);
     });
 
     //ADMIN ROUTES
     Route::prefix('dashboard')->middleware(['auth:sanctum', "ability:admin"])->group(function () {
         Route::prefix('user')->group(function () {
-            Route::get('/all', [UserController::class, 'index']);
             Route::post('/roles/{user_id}/{role_id}', [UserRolesController::class, 'store']);
+            Route::get('/all', [UserController::class, 'index']);
         });
+        Route::get('statistics', [StatisticsController::class, "index"]);
         Route::get("/train-routes/all", [TrainRouteContoller::class, "index"]);
         Route::post("train-schedule/add", [AdminTrainScheduleContoller::class, "store"]);
         Route::post('/reservations/all', [ReservationController::class, 'index']);

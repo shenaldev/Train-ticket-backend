@@ -7,6 +7,7 @@ use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\ReservationSeat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReservationController extends Controller
 {
@@ -88,5 +89,18 @@ class ReservationController extends Controller
         }
 
         return response()->json(["error" => true, "success" => false]);
+    }
+
+    public function count(Request $request)
+    {
+        $userID = $request->user()->id;
+        $reservationCount = DB::table('reservations')
+            ->where("user_id", "=", $userID)
+            ->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->get();
+
+        return response()->json($reservationCount);
+
     }
 }
