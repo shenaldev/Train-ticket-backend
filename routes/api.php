@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\V1\Public\LocationContoller;
 use App\Http\Controllers\Api\V1\Public\TrainScheduleContoller;
 use App\Http\Controllers\Api\V1\Roles\UserRolesController;
 use App\Http\Controllers\Api\V1\User\ReservationController as UserReservationController;
+use App\Http\Controllers\Api\V1\User\UserController as UserUserController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -53,6 +54,8 @@ Route::middleware('guest')->group(function () {
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     //USER ROUTES
     Route::prefix('user')->group(function () {
+        Route::get('/', [UserUserController::class, 'index']);
+        Route::post("/update", [UserUserController::class, "update"]);
         Route::get('/reservations', [UserReservationController::class, 'index']);
         Route::post('/reservation', [UserReservationController::class, 'store']);
         Route::get('/reservations/count', [UserReservationController::class, 'count']);
@@ -63,6 +66,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::prefix('user')->group(function () {
             Route::post('/roles/{user_id}/{role_id}', [UserRolesController::class, 'store']);
             Route::get('/all', [UserController::class, 'index']);
+            Route::delete("/{user_id}", [UserController::class, "destroy"]);
         });
         Route::get('statistics', [StatisticsController::class, "index"]);
         Route::get("/train-routes/all", [TrainRouteContoller::class, "index"]);
