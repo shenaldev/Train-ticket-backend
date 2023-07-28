@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\DB;
 
 class TrainScheduleContoller extends Controller
 {
+    public function index()
+    {
+        $trainSchedules = TrainSchedule::all();
+
+        return response()->json($trainSchedules);
+    }
+
+    /**
+     * STORE A NEW TRAIN SCHEDULE
+     */
     public function store(Request $request)
     {
         $request->validate([

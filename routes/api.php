@@ -67,12 +67,16 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::prefix('user')->group(function () {
             Route::post('/roles/{user_id}/{role_id}', [UserRolesController::class, 'store']);
             Route::get('/all', [UserController::class, 'index']);
+            Route::post("/edit", [UserController::class, "update"]);
             Route::delete("/{user_id}", [UserController::class, "destroy"]);
         });
         Route::get('statistics', [StatisticsController::class, "index"]);
+        //TRAIN ROUTES
         Route::get("/trains", [TrainContoller::class, "index"]);
         Route::get("/train-routes/all", [TrainRouteContoller::class, "index"]);
-        Route::post("train-schedule/add", [AdminTrainScheduleContoller::class, "store"]);
+        Route::get("/train-schedule/all", [AdminTrainScheduleContoller::class, "index"]);
+        Route::post("/train-schedule/add", [AdminTrainScheduleContoller::class, "store"]);
+        //RESERVATION ROUTES
         Route::post('/reservations/all', [ReservationController::class, 'index']);
     });
 });
