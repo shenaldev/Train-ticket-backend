@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\V1\Public\LocationContoller;
 use App\Http\Controllers\Api\V1\Public\TrainScheduleContoller;
 use App\Http\Controllers\Api\V1\Roles\UserRolesController;
 use App\Http\Controllers\Api\V1\User\ReservationController as UserReservationController;
+use App\Http\Controllers\Api\V1\User\TrainTrackingContoller;
 use App\Http\Controllers\Api\V1\User\UserController as UserUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::get('/reservations', [UserReservationController::class, 'index']);
         Route::post('/reservation', [UserReservationController::class, 'store']);
         Route::get('/reservations/count', [UserReservationController::class, 'count']);
+        Route::get("/tracking", [TrainTrackingContoller::class, "index"]);
     });
 
     //ADMIN ROUTES
