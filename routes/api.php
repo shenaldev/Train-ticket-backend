@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\Admin\ReservationController;
 use App\Http\Controllers\Api\V1\Admin\StatisticsController;
+use App\Http\Controllers\Api\V1\Admin\TrainContoller;
 use App\Http\Controllers\Api\V1\Admin\TrainRouteContoller;
 use App\Http\Controllers\Api\V1\Admin\TrainScheduleContoller as AdminTrainScheduleContoller;
 use App\Http\Controllers\Api\V1\Admin\UserController;
@@ -69,6 +70,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
             Route::delete("/{user_id}", [UserController::class, "destroy"]);
         });
         Route::get('statistics', [StatisticsController::class, "index"]);
+        Route::get("/trains", [TrainContoller::class, "index"]);
         Route::get("/train-routes/all", [TrainRouteContoller::class, "index"]);
         Route::post("train-schedule/add", [AdminTrainScheduleContoller::class, "store"]);
         Route::post('/reservations/all', [ReservationController::class, 'index']);
