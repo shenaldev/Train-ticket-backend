@@ -18,8 +18,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@trains.com',
             "phone_no" => "075-456-6651",
-            'nic' => '123456789',
-            'password' => Hash::make('pass'),
+            'nic' => '895001506v',
+            'password' => Hash::make('password'),
         ]);
 
         UserRole::create([
@@ -27,16 +27,55 @@ class UsersTableSeeder extends Seeder
             'role_id' => 1,
         ]);
 
-        $user = User::create([
-            'name' => 'user',
-            'email' => 'user@trains.com',
+        $user1 = User::create([
+            'name' => 'Boyce Cole',
+            'email' => 'boyce@mail.com',
             "phone_no" => "075-456-6653",
-            'nic' => '123456789',
-            'password' => Hash::make('pass'),
+            'nic' => '992501502v',
+            'password' => Hash::make('password'),
         ]);
 
         UserRole::create([
-            'user_id' => $user->id,
+            'user_id' => $user1->id,
+            'role_id' => 2,
+        ]);
+
+        $user2 = User::create([
+            'name' => 'Kasun Lakmal',
+            'email' => 'kasun@mail.com',
+            "phone_no" => "077-356-4253",
+            'nic' => '972106302v',
+            'password' => Hash::make('password'),
+        ]);
+
+        UserRole::create([
+            'user_id' => $user2->id,
+            'role_id' => 2,
+        ]);
+
+        $user3 = User::create([
+            'name' => 'Ishan Fernando',
+            'email' => 'ishan@mail.com',
+            "phone_no" => "071-456-1273",
+            'nic' => '19995631226',
+            'password' => Hash::make('password'),
+        ]);
+
+        UserRole::create([
+            'user_id' => $user3->id,
+            'role_id' => 2,
+        ]);
+
+        $user4 = User::create([
+            'name' => 'Danushi Malesha',
+            'email' => 'danushi@mail.com',
+            "phone_no" => "078-254-9853",
+            'nic' => '19974563566',
+            'password' => Hash::make('password'),
+        ]);
+
+        UserRole::create([
+            'user_id' => $user4->id,
             'role_id' => 2,
         ]);
 

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ReservationMail;
 use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\ReservationSeat;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -85,6 +88,12 @@ class ReservationController extends Controller
         ]);
 
         if ($reservation) {
+            //SEND RESERVATION EMAIL
+            $ticketNumber = sprintf("%06d", $reservation->id);
+            try {
+                Mail::to($request->user()->email)->send(new ReservationMail($ticketNumber));
+            } catch (Exception $ex) {}
+
             return response()->json(["error" => false, "success" => true]);
         }
 
