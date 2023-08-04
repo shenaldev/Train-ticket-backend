@@ -7,6 +7,7 @@ use App\Mail\ReservationMail;
 use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\ReservationSeat;
+use App\Models\TrainScheduleSeat;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -79,6 +80,15 @@ class ReservationController extends Controller
                 'seat_no' => $seat,
             ]);
         }
+
+        // REDUCE SEAT QUANTITY
+        $seatsDB = TrainScheduleSeat::where("schedule_id", "=", $request->schedule_id)
+            ->where("class_id", "=", $request->class_id)
+            ->first();
+
+        $countSeat = $seatsDB->available_count - sizeof($seats);
+        $seatsDB->available_count = $countSeat;
+        $seatsDB->save();
 
         Payment::create([
             'user_id' => $userID,

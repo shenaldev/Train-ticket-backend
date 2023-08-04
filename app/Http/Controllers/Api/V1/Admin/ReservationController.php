@@ -25,6 +25,7 @@ class ReservationController extends Controller
             ->join("reservations", "train_schedules.id", "=", "reservations.schedule_id")
             ->join('users', "users.id", "=", "reservations.user_id")
             ->join("trains", "trains.id", "=", "train_schedules.train_id")
+            ->orderBy("train_schedules.departure_time", "desc")
             ->paginate(30);
 
         return response()->json($reservations);
