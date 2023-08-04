@@ -15,7 +15,7 @@ class TrainScheduleContoller extends Controller
 {
     public function index()
     {
-        $trainSchedules = TrainSchedule::all();
+        $trainSchedules = TrainSchedule::orderBy("departure_time", "desc")->get();
 
         return response()->json($trainSchedules);
     }
@@ -72,5 +72,20 @@ class TrainScheduleContoller extends Controller
 
         return response()->json(["error" => false, "success" => true]);
 
+    }
+
+    /**
+     * Delete a train schedule
+     */
+    public function destroy($id)
+    {
+        $schedule = TrainSchedule::find($id);
+
+        if ($schedule) {
+            $schedule->delete();
+            return response()->json(["error" => false, "success" => true]);
+        }
+
+        return response()->json(["error" => true, "success" => false]);
     }
 }

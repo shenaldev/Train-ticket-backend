@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
             TrainsTableSeeder::class,
             ClassesTableSeeder::class,
             TrainRouteSeeder::class,
-            TrainSchedulesTableSeeder::class,
-            ReservationTableSeeder::class,
-            ReservationSeatSeeder::class,
+            //TrainSchedulesTableSeeder::class,
+            //ReservationTableSeeder::class,
+            //ReservationSeatSeeder::class,
         ]);
     }
 }
